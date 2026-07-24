@@ -4,16 +4,22 @@
 사용자가 "포스팅해줘", "글 써줘" 또는 inbox에 사진을 넣었다고 하면 아래 절차를 따르세요.
 
 ## 최초 세팅 ("세팅해줘" 요청 시)
-1. `pip3 install -r requirements.txt` 실행 (또는 `bash setup.sh`)
+1. `pip3 install -r requirements.txt` 실행 (macOS: `bash setup.sh` / Windows: `setup.bat`)
 2. `python3 -m playwright install chromium` 실행
 3. `config.yaml`의 `naver_blog_id`가 비어있으면 사용자에게 블로그 아이디를 물어봐서 채운다.
+
+※ Windows에서는 `python3`/`pip3` 대신 `python`/`pip`을 사용할 것.
 
 ## 워크플로우
 
 ### 1. 사진·동영상 확인
 - `inbox/` 폴더의 이미지 파일(jpg/jpeg/png/webp)을 모두 Read 도구로 직접 읽는다.
-- HEIC 파일은 Read가 못 읽으므로 `sips -s format jpeg -Z 700 <파일> --out <미리보기>.jpg`로 변환해서 읽는다. 발행용도 HEIC는 네이버 업로드가 안 될 수 있으니 `sips -s format jpeg -s formatOptions 90`으로 JPG 변환본을 만든다. (sips는 macOS 전용 — 다른 OS면 ImageMagick 등으로 대체)
-- 동영상(mov/mp4)은 `qlmanage -t -s 400 -o <출력폴더> <파일>`로 썸네일을 뽑아 내용을 파악하고, 파일명 타임스탬프로 사진과의 순서를 맞춘다.
+- HEIC 파일은 Read가 못 읽으므로 JPG로 변환해서 읽는다. 발행용도 HEIC는 네이버 업로드가 안 될 수 있으니 JPG 변환본을 만든다.
+  - macOS: `sips -s format jpeg -Z 700 <파일> --out <미리보기>.jpg` (발행용은 `-s formatOptions 90`, -Z 없이)
+  - Windows: ImageMagick이 있으면 `magick <파일> <출력>.jpg`. 없으면 `pip install pillow pillow-heif` 후 짧은 파이썬 스크립트로 변환. 둘 다 어려우면 사용자에게 휴대폰에서 JPG로 다시 보내달라고 안내.
+- 동영상(mov/mp4)은 썸네일을 뽑아 내용을 파악하고, 파일명 타임스탬프로 사진과의 순서를 맞춘다.
+  - macOS: `qlmanage -t -s 400 -o <출력폴더> <파일>`
+  - Windows: ffmpeg이 있으면 `ffmpeg -i <파일> -vf "thumbnail,scale=400:-1" -frames:v 1 <출력>.jpg`. 없으면 썸네일 없이 파일명·사용자 설명으로 배치.
 - 사진이 없으면 사용자에게 inbox에 사진을 넣어달라고 안내한다.
 - `inbox/memo.txt`가 있으면 읽는다 (가게 이름, 장소 등 사용자가 준 정확한 정보).
 

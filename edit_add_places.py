@@ -76,9 +76,10 @@ def main():
         _dismiss_popups(page)
         print("문서:", page.locator(".se-section-documentTitle").first.inner_text()[:50].strip())
 
-        # 커서를 문서 맨 끝으로
+        # 커서를 문서 맨 끝으로 (mac: Cmd+↓ / win: Ctrl+End)
         page.locator(".se-section-text").last.click(timeout=8000)
-        page.keyboard.press("Meta+ArrowDown")
+        page.keyboard.press(
+            "Meta+ArrowDown" if sys.platform == "darwin" else "Control+End")
         time.sleep(0.5)
 
         # 장소 팝업 열고 전부 추가

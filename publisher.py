@@ -11,6 +11,7 @@
 """
 import os
 import subprocess
+import sys
 import time
 from pathlib import Path
 
@@ -18,10 +19,16 @@ PROFILE_DIR = Path(__file__).parent / "browser_profile"
 
 
 def _keep_awake():
-    """작업 중 맥이 잠자기로 전환되면 업로드/입력이 통째로 멈추므로 caffeinate로 방지.
-    -w 옵션: 이 파이썬 프로세스가 끝나면 caffeinate도 자동 종료 (화면보호기는 떠도 무방)."""
+    """작업 중 PC가 잠자기로 전환되면 업로드/입력이 통째로 멈추므로 방지.
+    macOS: caffeinate (-w: 이 파이썬 프로세스가 끝나면 자동 종료)
+    Windows: SetThreadExecutionState (프로세스 종료 시 자동 해제)"""
     try:
-        subprocess.Popen(["caffeinate", "-dims", "-w", str(os.getpid())])
+        if sys.platform == "win32":
+            import ctypes
+            # ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_DISPLAY_REQUIRED
+            ctypes.windll.kernel32.SetThreadExecutionState(0x80000003)
+        else:
+            subprocess.Popen(["caffeinate", "-dims", "-w", str(os.getpid())])
         print("☕ 작업 중 잠자기 방지 활성화 (완료 시 자동 해제)")
     except Exception:
         pass

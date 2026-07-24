@@ -9,10 +9,13 @@
 
 ## 준비물
 
-- macOS (사진 변환에 `sips`, 영상 썸네일에 `qlmanage`를 사용합니다)
-- Python 3.9+
+- **macOS 또는 Windows**
+- Python 3.9+ (Windows는 [python.org](https://www.python.org/downloads/)에서 설치 — "Add python.exe to PATH" 체크 필수)
 - [Claude 데스크탑 앱](https://claude.ai/download) 또는 Claude Code CLI
 - 네이버 블로그 계정
+
+> Windows 참고: 아이폰 HEIC 사진 변환·영상 썸네일에 ImageMagick/ffmpeg이 있으면 좋지만,
+> 없어도 Claude Code가 상황에 맞게 안내해줍니다. 갤럭시/JPG 사진은 아무 준비 없이 바로 됩니다.
 
 ## 최초 세팅 (1회)
 
@@ -25,10 +28,7 @@
    → 알아서 `pip install`과 `playwright install`을 실행하고,
    `config.yaml`의 블로그 아이디도 물어봐서 채워줍니다.
 
-   수동으로 하려면:
-   ```bash
-   bash setup.sh
-   ```
+   수동으로 하려면 — macOS: `bash setup.sh` / Windows: `setup.bat` 더블클릭.
    그리고 `config.yaml`의 `naver_blog_id`에 본인 블로그 아이디를 입력하세요.
 
 4. 첫 발행 시 브라우저가 열리면 **네이버 로그인**을 한 번 해주세요.
