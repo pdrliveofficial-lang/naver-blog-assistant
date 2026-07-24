@@ -1,0 +1,19 @@
+# 네이버 블로그 아이디 (blog.naver.com/여기부분) — 필수!
+naver_blog_id: ""
+
+# 발행 시 자동 선택할 카테고리명 (비워두면 기본 카테고리)
+category: ""
+
+# auto(에디터 자동입력) / clipboard(복사 후 수동 붙여넣기)
+publish_mode: "auto"
+
+# true면 자동 입력 중 브라우저 창을 최소화 (입력 완료 시 다시 띄움)
+# 처음 사용할 때는 false로 두고 동작을 눈으로 확인하는 걸 추천합니다.
+hide_browser: false
+
+# 본문 정렬: center / left / right / justify (비우면 기본값 유지)
+text_align: ""
+
+# true면 최종 [발행] 버튼까지 자동 클릭
+# false면 에디터까지만 자동 입력하고, 최종 [발행]은 직접 누릅니다. (처음엔 false 추천)
+auto_publish: false

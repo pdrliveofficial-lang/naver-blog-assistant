@@ -1,0 +1,15 @@
+# 네이버 로그인 세션 — 절대 공유 금지
+browser_profile/
+
+# 개인 콘텐츠
+inbox/*
+drafts/*
+published/*
+!inbox/.gitkeep
+!drafts/.gitkeep
+!published/.gitkeep
+
+# 시스템/기타
+.DS_Store
+__pycache__/
+*.pyc
