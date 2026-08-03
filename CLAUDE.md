@@ -17,9 +17,9 @@
 - HEIC 파일은 Read가 못 읽으므로 JPG로 변환해서 읽는다. 발행용도 HEIC는 네이버 업로드가 안 될 수 있으니 JPG 변환본을 만든다.
   - macOS: `sips -s format jpeg -Z 700 <파일> --out <미리보기>.jpg` (발행용은 `-s formatOptions 90`, -Z 없이)
   - Windows: ImageMagick이 있으면 `magick <파일> <출력>.jpg`. 없으면 `pip install pillow pillow-heif` 후 짧은 파이썬 스크립트로 변환. 둘 다 어려우면 사용자에게 휴대폰에서 JPG로 다시 보내달라고 안내.
-- 동영상(mov/mp4)은 썸네일을 뽑아 내용을 파악하고, 파일명 타임스탬프로 사진과의 순서를 맞춘다.
+- ⚠️ **동영상(mov/mp4)이 하나라도 있으면 `VIDEO_GUIDE.md`를 반드시 먼저 읽고 그 절차대로 진행할 것** (실제 사고 사례 기반 검증 절차: 썸네일 확인 → 10개 선별 → 한글 리네임 → 발행 로그 검수). 썸네일 추출:
   - macOS: `qlmanage -t -s 400 -o <출력폴더> <파일>`
-  - Windows: ffmpeg이 있으면 `ffmpeg -i <파일> -vf "thumbnail,scale=400:-1" -frames:v 1 <출력>.jpg`. 없으면 썸네일 없이 파일명·사용자 설명으로 배치.
+  - Windows: ffmpeg이 있으면 `ffmpeg -i <파일> -vf "thumbnail,scale=400:-1" -frames:v 1 <출력>.jpg`. 없으면 `winget install ffmpeg` 후 사용 (내용 확인 없는 추측 배치 금지).
 - 사진이 없으면 사용자에게 inbox에 사진을 넣어달라고 안내한다.
 - `inbox/memo.txt`가 있으면 읽는다 (가게 이름, 장소 등 사용자가 준 정확한 정보).
 
